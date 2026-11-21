@@ -48,3 +48,40 @@ function logout(ev) {
   document.querySelector("#logout").hidden = true;
   document.querySelector(".loaded").innerHTML = "";
 }
+
+function loadPosts() {
+  const token = sessionStorage.getItem("token");
+  document.body.classList.add("fetching");
+
+  fetch("https://dummyjson.com/auth/posts", {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      if (!response.ok) throw new Error("Could not load posts.");
+      return response.json();
+    })
+    .then(function (data) {
+      const list = document.querySelector(".loaded");
+      list.innerHTML = "";
+      data.posts.forEach(function (post) {
+        const div = document.createElement("div");
+        div.className = "post";
+        const title = document.createElement("h3");
+        title.textContent = post.title;
+        const body = document.createElement("p");
+        body.textContent = post.body;
+        div.append(title, body);
+        list.append(div);
+      });
+      document.body.classList.remove("fetching");
+      document.body.classList.add("loaded");
+    })
+    .catch(function (err) {
+      document.body.classList.remove("fetching");
+      document.querySelector("#errorMessage").textContent = err.message;
+      document.querySelector("#errorDialog").showModal();
+    });
+}
