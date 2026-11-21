@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  const token = sessionStorage.getItem("token");
-  if (token) {
+  const user = JSON.parse(sessionStorage.getItem("steve-app-tokens"));
+  if (user && user.accessToken) {
     document.body.classList.add("authenticated");
     document.querySelector("#logout").hidden = false;
+    showUser(user);
+    loadPosts(user.accessToken);
   }
 
   document.querySelector("#login_form").addEventListener("submit", login);
@@ -29,10 +31,11 @@ function login(ev) {
       return response.json();
     })
     .then(function (user) {
-      sessionStorage.setItem("token", user.accessToken);
-      sessionStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("steve-app-tokens", JSON.stringify(user));
       document.body.classList.add("authenticated");
       document.querySelector("#logout").hidden = false;
+      showUser(user);
+      loadPosts(user.accessToken);
     })
     .catch(function (err) {
       document.querySelector("#errorMessage").textContent = err.message;
@@ -40,23 +43,17 @@ function login(ev) {
     });
 }
 
-function logout(ev) {
-  ev.preventDefault();
-  sessionStorage.removeItem("token");
-  sessionStorage.removeItem("user");
-  document.body.classList.remove("authenticated", "fetching");
-  document.querySelector("#logout").hidden = true;
-  document.querySelector(".loaded").innerHTML = "";
+function showUser(user) {
+  document.querySelector("h1 span").textContent =
+    "for " + user.firstName + " " + user.lastName;
 }
 
-function loadPosts() {
-  const token = sessionStorage.getItem("token");
+function loadPosts(token) {
   document.body.classList.add("fetching");
 
   fetch("https://dummyjson.com/auth/posts", {
     headers: {
       Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
     },
   })
     .then(function (response) {
@@ -84,4 +81,15 @@ function loadPosts() {
       document.querySelector("#errorMessage").textContent = err.message;
       document.querySelector("#errorDialog").showModal();
     });
+}
+
+function logout(ev) {
+  ev.preventDefault();
+  sessionStorage.removeItem("steve-app-tokens");
+  document.body.classList.remove("authenticated", "fetching", "loaded");
+  document.querySelector("#logout").hidden = true;
+  document.querySelector("h1 span").textContent = "";
+  document.querySelector(".loaded").innerHTML = "";
+  document.querySelector("#username").value = "";
+  document.querySelector("#pass").value = "";
 }
