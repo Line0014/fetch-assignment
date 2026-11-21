@@ -110,3 +110,7 @@ dialog {
   border-radius: var(--radius);
   padding: var(--space);
 }
+
+body.loaded .loaded {
+  display: block;
+}
