@@ -114,3 +114,13 @@ dialog {
 body.loaded .loaded {
   display: block;
 }
+
+h1 span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h1 span img {
+  border-radius: 50%;
+}
