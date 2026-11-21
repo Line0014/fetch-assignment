@@ -73,3 +73,40 @@ body.authenticated #authenticated {
   border: 1px solid var(--muted);
   border-radius: var(--radius);
 }
+
+#btnLogin {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: var(--radius);
+  background-color: var(--accent);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.loading {
+  display: none;
+}
+
+body.fetching .loading {
+  display: block;
+}
+
+body.fetching .loaded {
+  display: none;
+}
+
+.post {
+  background-color: var(--surface);
+  border-radius: var(--radius);
+  padding: var(--space);
+  margin-bottom: var(--space);
+}
+
+dialog {
+  border: 0;
+  border-radius: var(--radius);
+  padding: var(--space);
+}
