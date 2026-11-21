@@ -44,9 +44,6 @@ function login(ev) {
 }
 
 function showUser(user) {
-  document.querySelector("h1 span").textContent =
-    "for " + user.firstName + " " + user.lastName;
-
   document.querySelector("h1 span").innerHTML =
     '<img src="' +
     user.image +
