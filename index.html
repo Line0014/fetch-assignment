@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch Assignment</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body class="public">
+    <header>
+      <h1>Authorized Posts <span></span></h1>
+      <nav class="logout">
+        <a href="#logout" id="logout" hidden
+          ><img src="./img/account_circle_24dp.svg" /> Log Out</a
+        >
+      </nav>
+    </header>
+    <main>
+      <section id="authentication">
+        <h2>Welcome to the Site</h2>
+        <p>To access the content, please login below.</p>
+        <form id="login_form">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            maxlength="30"
+            required
+            autocomplete="username"
+          />
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            id="pass"
+            name="pass"
+            maxlength="30"
+            required
+          />
+          <span>&nbsp;</span>
+          <button id="btnLogin">
+            <img src="./img/account_circle_24dp.svg" /> Log In
+          </button>
+        </form>
+      </section>
+      <section id="authenticated">
+        <section class="loading">
+          <p>Waiting for the good stuff...</p>
+        </section>
+        <section class="loaded">
+          <!-- post data goes here -->
+        </section>
+      </section>
+    </main>
+    <dialog id="errorDialog">
+      <p id="errorMessage"></p>
+      <button id="closeDialog">Close</button>
+    </dialog>
+  </body>
+</html>
