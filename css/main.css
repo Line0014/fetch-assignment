@@ -1,0 +1,75 @@
+@import url(./normalize.css);
+
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --header: #2c3e50;
+  --text: #1f2933;
+  --accent: #1f6f5c;
+  --muted: #52606d;
+  --radius: 0.5rem;
+  --space: 1rem;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header);
+  color: #ffffff;
+  padding: var(--space);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.logout a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space);
+}
+
+#authentication {
+  display: block;
+}
+
+#authenticated {
+  display: none;
+}
+
+body.authenticated #authentication {
+  display: none;
+}
+
+body.authenticated #authenticated {
+  display: block;
+}
+
+#login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 320px;
+}
+
+#login_form input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+}
